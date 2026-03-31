@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEU VEÍCULO</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">SEU<span>VEÍCULO</span></a>
+            <nav class="nav">
+                <a href="#" class="nav-link active">HOME</a>
+                <a href="#estoque" class="nav-link">CATALOG</a>
+                <a href="#sobre-empresa" class="nav-link">ABOUT</a>
+                <a href="#contato-formulario" class="nav-link">CONTACT</a>
+                <a href="#contato-formulario" class="nav-link">FINANCING</a>
+            </nav>
+            <div class="header-actions">
+                <a href="#contato-formulario" class="btn btn-red">RESERVAR AGORA</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-track" id="hero-track">
+            <div class="hero sticky-hero">
+                <div class="hero-bg">
+                    <canvas id="hero-canvas"></canvas>
+                </div>
+                <div class="hero-overlay" style="background: rgba(0,0,0,0.7);"></div>
+                <div class="container hero-content">
+                <h1 class="hero-title">
+                    ENCONTRE O<br>
+                    CARRO <span class="text-red">IDEAL</span> PARA<br>
+                    VOCÊ
+                </h1>
+                <p class="hero-subtitle">
+                    A curadoria definitiva de veículos premium.<br>
+                    Engenharia, performance e exclusividade em um só<br>
+                    lugar.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#estoque" class="btn btn-red btn-lg">VER ESTOQUE</a>
+                    <a href="#sobre" class="btn btn-outline btn-lg">SAIBA MAIS</a>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="filters-section">
+            <div class="container">
+                <div class="filters-container">
+                    <div class="filters-grid">
+                        <div class="filter-col">
+                            <label>MARCA</label>
+                            <div class="custom-select">
+                                <select id="filter-marca">
+                                    <option value="">Todas as Marcas</option>
+                                    <!-- Options injetadas via JS baseado no inventário real -->
+                                </select>
+                                <div class="select-arrow"></div>
+                            </div>
+                        </div>
+                        <div class="filter-col">
+                            <label>PREÇO</label>
+                            <div class="custom-select">
+                                <select id="filter-preco">
+                                    <option value="">Qualquer valor</option>
+                                    <!-- Injetado dinamicamente via JS baseado no inventário -->
+                                </select>
+                                <div class="select-arrow"></div>
+                            </div>
+                        </div>
+                        <div class="filter-col">
+                            <label>ANO</label>
+                            <div class="custom-select">
+                                <select id="filter-ano">
+                                    <option value="">Todos</option>
+                                    <option value="2024">Daqui em diante (2024+)</option>
+                                    <option value="2022">Semi-novos (2022+)</option>
+                                    <option value="2020">Relíquias (-2020)</option>
+                                </select>
+                                <div class="select-arrow"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-action">
+                        <button id="btn-filtrar" class="btn btn-red btn-lg">FILTRAR &#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog Section -->
+        <section id="estoque" class="catalog-section">
+            <div class="container">
+                <div class="catalog-header">
+                    <div class="catalog-title-col">
+                        <h2 class="section-title">DESTAQUES DO <span class="text-red">ESTOQUE</span></h2>
+                        <p class="section-subtitle">Explore as máquinas que definem o topo da engenharia automotiva<br>mundial.</p>
+                    </div>
+                    <div class="header-line">
+                        <div class="line-red"></div>
+                        <div class="line-grey"></div>
+                    </div>
+                </div>
+                
+                <div class="catalog-grid" id="catalog-grid">
+                    <!-- Cards will be injected via JS -->
+                </div>
+                
+                <div class="catalog-footer" id="catalog-footer-wrapper">
+                    <div class="line"></div>
+                    <a href="javascript:void(0)" id="btn-ver-catalogo" class="btn-text" style="cursor: pointer;">VER CATÁLOGO COMPLETO</a>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sobre a Empresa Banner -->
+        <section id="sobre-empresa" class="company-banner">
+            <div class="container company-content fade-in-up">
+                <h2 class="section-title">SOBRE A <span class="text-red">SEU VEÍCULO</span></h2>
+                <p class="company-desc">Somos a principal referência no mercado de veículos premium. Nosso compromisso é entregar excelência absoluta desde o momento em que você entra em nosso showroom até a entrega da chave do seu novo carro.</p>
+            </div>
+        </section>
+        
+        <!-- About Section (Monólito) -->
+        <section id="sobre" class="about-section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-img-col fade-in-left">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Showroom SEU NOME" loading="lazy">
+                            <div class="experience-badge">
+                                <span class="number">15</span>
+                                <span class="text">ANOS DE<br>EXCELÊNCIA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-text-col fade-in-right">
+                        <span class="overtitle text-red">SEU VEÍCULO LTDA</span>
+                        <h2 class="about-title">O MONÓLITO DA<br><span class="text-grey">PERFORMANCE.</span></h2>
+                        
+                        <div class="about-paragraphs">
+                            <p>Na SEU VEÍCULO, não vendemos apenas carros: entregamos o auge da engenharia e do design automotivo. Localizada no coração do mercado premium, nossa concessionária é um destino para entusiastas que buscam nada menos que a perfeição.</p>
+                            <p>Cada veículo em nosso estoque passa por uma rigorosa curadoria técnica, garantindo que a procedência e a performance estejam em total harmonia com o legado de suas marcas.</p>
+                        </div>
+                        
+                        <div class="features-row">
+                            <div class="feature fade-in-up delay-1">
+                                <h4>Curadoria</h4>
+                                <div class="red-dash"></div>
+                                <p>Seleção minuciosa de veículos únicos e<br>exclusivos.</p>
+                            </div>
+                            <div class="feature fade-in-up delay-2">
+                                <h4>Confiança</h4>
+                                <div class="red-dash"></div>
+                                <p>Histórico e certificação de valor<br>100% perfeitos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Formulário e Mapa Section -->
+        <section id="contato-formulario" class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Coluna do Formulário -->
+                    <div class="contact-form-col fade-in-left">
+                        <h3 class="contact-title">FALE COM UM <span class="text-red">CONSULTOR</span></h3>
+                        <p class="contact-subtitle">Preencha o formulário e nossa equipe entrará em contato via WhatsApp.</p>
+                        
+                        <form id="whatsapp-form" class="whatsapp-form">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo</label>
+                                <input type="text" id="nome" required placeholder="Seu nome">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone (WhatsApp)</label>
+                                <input type="tel" id="telefone" required placeholder="(11) 99999-9999">
+                            </div>
+                            <div class="form-group">
+                                <label for="mensagem">Veículo de Interesse ou Dúvida</label>
+                                <textarea id="mensagem" rows="4" required placeholder="Olá, gostaria de mais informações..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-red btn-block btn-lg" style="width: 100%;">ENVIAR PARA WHATSAPP</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Coluna do Mapa -->
+                    <div class="contact-map-col fade-in-right">
+                        <h3 class="contact-title">NOSSA <span class="text-red">LOCALIZAÇÃO</span></h3>
+                        <p class="contact-subtitle">Venha nos fazer uma visita.</p>
+                        <div class="map-wrapper">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14629.757041530263!2d-46.68370788643196!3d-23.575084922119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5772fb2a5433%3A0xb35aa3cc5f08216c!2sAvenida%20Europa%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1711902000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">SEU<span>VEÍCULO</span></div>
+            <nav class="footer-nav">
+                <a href="#">INVENTORY</a>
+                <a href="#">PRIVACY POLICY</a>
+                <a href="#">TERMS OF SERVICE</a>
+                <a href="#">CAREERS</a>
+                <a href="#">SUPPORT</a>
+            </nav>
+            <div class="footer-socials">
+                <a href="#" aria-label="Phone"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
+                <a href="#" aria-label="Location"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"></circle><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg></a>
+                <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                <a href="#" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+            </div>
+            <div class="footer-copy">
+                © 2026 SEU VEÍCULO LTDA.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Detalhes -->
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Fechar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-body" id="modal-body">
+                <!-- Injetado dinamicamente via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox de Imagem em Tela Cheia -->
+    <div id="lightbox-modal" class="lightbox">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">&times;</button>
+        <button class="lightbox-btn prev" id="lightbox-prev" aria-label="Anterior">&#10094;</button>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Imagem em Tela Cheia">
+        <button class="lightbox-btn next" id="lightbox-next" aria-label="Próxima">&#10095;</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
