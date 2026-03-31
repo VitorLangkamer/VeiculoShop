@@ -263,6 +263,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Toggle Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Clica nos itens do menu
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+
     renderCars();
     
     // Funcionalidade de Expandir / Retrair Catálogo Completo
@@ -363,7 +379,7 @@ window.openModal = (id) => {
                        car.id === 4 ? '3.2s (0-100)' :
                        car.id === 5 ? '3.2s (0-100)' : '3.0s (0-100)';
     
-    const fone = "5511999999999"; 
+    const fone = "27997067711"; 
     const textoPreEscrito = `Olá! Tenho interesse e gostaria de mais detalhes sobre o ${car.marca} ${car.modelo} no valor de ${formatCurrency(car.preco)}.`;
     const zapLink = `https://wa.me/${fone}?text=${textoPreEscrito}`;
 
@@ -519,7 +535,7 @@ if (whatsappForm) {
         const msg = document.getElementById('mensagem').value;
         
         // Número da concessionária
-        const fone = "5511999999999"; 
+        const fone = "27997067711"; 
         
         const textoPreEscrito = `Olá, me chamo ${nome}.%0A${msg}`;
         const zapLink = `https://wa.me/${fone}?text=${textoPreEscrito}`;
