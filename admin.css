@@ -209,3 +209,77 @@
 .admin-form-group input:focus, .admin-form-group select:focus {
     border-color: var(--color-red);
 }
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE & TABLET) - ADMIN
+=========================================== */
+@media (max-width: 900px) {
+    .admin-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .admin-content {
+        padding-top: 30px;
+    }
+    
+    .admin-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .admin-topbar h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    .admin-topbar button {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    /* Faz a tabela encolher bem na tela, scroll-x ta salvo pelo wrapper */
+    .admin-table th, .admin-table td {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    .admin-table img {
+        width: 60px;
+        height: 40px;
+    }
+
+    .action-btns {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .btn-small {
+        width: 100%;
+        padding: 8px;
+        font-size: 0.65rem;
+    }
+
+    /* Modal Form Mobile Ajuste */
+    .modal-content {
+        padding: 24px !important;
+        width: 95% !important;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Transforma hardcoded inlines de 2 grid-cols para 1 (exemplo no input de anos e km )*/
+    *[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 0px !important;
+    }
+    
+    /* Login Mobile Box */
+    .login-box {
+        padding: 30px;
+        padding-bottom: 40px;
+        margin: 10px;
+    }
+}
