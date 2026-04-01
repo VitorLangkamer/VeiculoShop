@@ -168,11 +168,13 @@ if (canvas) {
         context.drawImage(imgFirst, 0, 0);
     };
 
-    // Preload dos frames em background para performance
-    for (let i = 1; i <= frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
-        images.push(img);
+    // Preload dos frames em background para performance (Apenas Desktop)
+    if (window.innerWidth > 990) {
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            images.push(img);
+        }
     }
 
     // Engine da animação vinculada ao scroll
@@ -186,14 +188,15 @@ if (canvas) {
         const maxScroll = heroTrack.clientHeight - window.innerHeight;
         
         // Progresso será 0 quando trackRect.top = 0, e 1 quando trackRect.top = -maxScroll
-        let scrollProgress = -trackRect.top / maxScroll;
+        let scrollProgress = 0;
+        if (maxScroll > 0) {
+            scrollProgress = -trackRect.top / maxScroll;
+        }
         
         // Evita extrapolar
         if (scrollProgress < 0) scrollProgress = 0;
         if (scrollProgress > 1) scrollProgress = 1;
         
-        // Transforma o progresso (0.0 até 1.0) num índíce de array
-        // Math.floor para não estourar. Index máximo é frameCount - 1
         const frameIndex = Math.min(
             frameCount - 1,
             Math.floor(scrollProgress * frameCount)
@@ -211,7 +214,7 @@ if (canvas) {
         const header = document.querySelector('.header');
         if (header) {
             // Hero passa da tela quando scroll é maior que a diferença
-            if (window.scrollY > maxScroll - 50) { 
+            if (window.scrollY > maxScroll - 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
@@ -260,6 +263,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 opt.innerText = `Até R$ ${milhoes} Milh${milhoes === 1 ? 'ão' : 'ões'}`;
             }
             filterPrecoSelect.appendChild(opt);
+        });
+    }
+
+    // Toggle Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Clica nos itens do menu
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
         });
     }
 
@@ -363,7 +382,7 @@ window.openModal = (id) => {
                        car.id === 4 ? '3.2s (0-100)' :
                        car.id === 5 ? '3.2s (0-100)' : '3.0s (0-100)';
     
-    const fone = "5511999999999"; 
+    const fone = "27997067711"; 
     const textoPreEscrito = `Olá! Tenho interesse e gostaria de mais detalhes sobre o ${car.marca} ${car.modelo} no valor de ${formatCurrency(car.preco)}.`;
     const zapLink = `https://wa.me/${fone}?text=${textoPreEscrito}`;
 
@@ -519,7 +538,7 @@ if (whatsappForm) {
         const msg = document.getElementById('mensagem').value;
         
         // Número da concessionária
-        const fone = "5511999999999"; 
+        const fone = "27997067711"; 
         
         const textoPreEscrito = `Olá, me chamo ${nome}.%0A${msg}`;
         const zapLink = `https://wa.me/${fone}?text=${textoPreEscrito}`;
