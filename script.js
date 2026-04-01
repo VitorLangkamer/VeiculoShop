@@ -168,11 +168,13 @@ if (canvas) {
         context.drawImage(imgFirst, 0, 0);
     };
 
-    // Preload dos frames em background para performance
-    for (let i = 1; i <= frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
-        images.push(img);
+    // Preload dos frames em background para performance (Apenas Desktop)
+    if (window.innerWidth > 990) {
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            images.push(img);
+        }
     }
 
     // Engine da animação vinculada ao scroll
@@ -186,7 +188,10 @@ if (canvas) {
         const maxScroll = heroTrack.clientHeight - window.innerHeight;
         
         // Progresso será 0 quando trackRect.top = 0, e 1 quando trackRect.top = -maxScroll
-        let scrollProgress = -trackRect.top / maxScroll;
+        let scrollProgress = 0;
+        if (maxScroll > 0) {
+            scrollProgress = -trackRect.top / maxScroll;
+        }
         
         // Evita extrapolar
         if (scrollProgress < 0) scrollProgress = 0;

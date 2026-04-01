@@ -1225,6 +1225,10 @@ a {
     }
 
     /* Filters Grid */
+    .hero-track {
+        height: 100vh; /* Track desativado no mobile (imagem estática para evitar conflitos) */
+    }
+
     .filters-section {
         margin-top: 20px;
         margin-bottom: 30px;
