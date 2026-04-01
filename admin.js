@@ -86,15 +86,21 @@ const saveCars = () => {
     renderTable(); // Atualiza a tabela imediatamente após salvar
 };
 
-const renderTable = () => {
+const renderTable = (searchTerm = "") => {
     const tbody = document.getElementById('admin-table-body');
     tbody.innerHTML = '';
     
     // Atualiza o banco do LocalStorage para espelhar a tela
     cars = JSON.parse(localStorage.getItem('mhp_cars')) || [];
     
-    // Lista todos os itens e constrói linhas (<tr>)
-    cars.forEach(car => {
+    // Filtro simulando um "%LIKE%" no Banco de Dados
+    const filteredCars = cars.filter(car => {
+        const textToSearch = `${car.id} ${car.marca} ${car.modelo} ${car.ano}`.toLowerCase();
+        return textToSearch.includes(searchTerm.toLowerCase());
+    });
+    
+    // Lista todos os itens cruzados e constrói linhas (<tr>)
+    filteredCars.forEach(car => {
         const tr = document.createElement('tr');
         
         let tagBadge = car.novidade 
@@ -117,6 +123,19 @@ const renderTable = () => {
         `;
         tbody.appendChild(tr);
     });
+    // Dashboard Statistics Calculation
+    let bruto = 0;
+    cars.forEach(car => {
+        bruto += car.preco;
+    });
+
+    // Update UI Stats
+    document.getElementById('stat-qtd').innerText = cars.length;
+    document.getElementById('stat-bruto').innerText = formatCurrency(bruto);
+
+    // Render Revenue (Faturamento)
+    const faturamento = JSON.parse(localStorage.getItem('mhp_faturamento')) || 0;
+    document.getElementById('stat-faturamento').innerText = formatCurrency(faturamento);
 };
 
 /* --- Eventos Administrativos --- */
@@ -141,6 +160,14 @@ logoutBtn.addEventListener('click', () => {
     sessionStorage.removeItem('mhp_admin_logged');
     checkAuth();
 });
+
+// Filtro de Busca da Tabela
+const searchInput = document.getElementById('admin-search-input');
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        renderTable(e.target.value);
+    });
+}
 
 // Aciona Modal Adicionar Veículo Vazio
 btnAddCar.addEventListener('click', () => {
@@ -347,11 +374,68 @@ window.editCar = (id) => {
 };
 
 window.deleteCar = (id) => {
-    if (confirm("🚨 TEM CERTEZA? O carro será sumariamente excluído do catálogo no site principal.")) {
+    const car = cars.find(c => c.id === id);
+    if (!car) return;
+    if (confirm(`🚨 TEM CERTEZA que deseja excluir o ${car.marca} ${car.modelo}?`)) {
+        // Confirmação para saber se foi uma venda ou apenas remoção técnica
+        if (confirm(`💰 Esse veículo foi VENDIDO? (Clique OK para adicionar ${formatCurrency(car.preco)} ao Faturamento do Mês, ou no botão de Cancelar se for apenas uma remoção de anúncio).`)) {
+            // Guarda o carro completo no histórico de vendas
+            let vendas = JSON.parse(localStorage.getItem('mhp_vendas_mes')) || [];
+            car.data_venda = new Date().toISOString();
+            vendas.push(car);
+            localStorage.setItem('mhp_vendas_mes', JSON.stringify(vendas));
+
+            // Mantém cálculo do painel simples para faturamento
+            let faturamento = JSON.parse(localStorage.getItem('mhp_faturamento')) || 0;
+            faturamento += car.preco;
+            localStorage.setItem('mhp_faturamento', JSON.stringify(faturamento));
+        }
+
         cars = cars.filter(c => c.id !== id);
         saveCars();
     }
 };
+
+/* --- Exportação Excel (CSV) Relatório de Faturamento Mensal --- */
+document.getElementById('btn-export-excel').addEventListener('click', () => {
+    let vendas = JSON.parse(localStorage.getItem('mhp_vendas_mes')) || [];
+    
+    if (vendas.length === 0) {
+        alert("Ainda não existem vendas registradas no sistema nesse mês para gerar o relatório.");
+        return;
+    }
+
+    const csvRows = [];
+    csvRows.push("RELATORIO MENSAL DE VEICULOS VENDIDOS (FATURAMENTO)");
+    csvRows.push("");
+    // Cabeçalho compatível com Excel pt-BR
+    csvRows.push("DATA DA VENDA;ID ORIGINAL;MARCA;MODELO;ANO;KM;VALOR DA VENDA");
+    
+    let faturamentoAcumulado = 0;
+    
+    vendas.forEach(car => {
+        const dataStr = new Date(car.data_venda).toLocaleDateString('pt-BR');
+        // Envolve strings em aspas e usa Ponto e Vírgula para colunas
+        const row = `${dataStr};${car.id};${car.marca};"${car.modelo}";"${car.ano}";"${car.km}";${car.preco}`;
+        csvRows.push(row);
+        faturamentoAcumulado += car.preco;
+    });
+    
+    csvRows.push("");
+    csvRows.push(`;;;;;TOTAL FATURADO:;${faturamentoAcumulado}`);
+    
+    const csvString = csvRows.join("\n");
+    // BOM (\uFEFF) para forçar o Excel a reconhecer o UTF-8 correto
+    const blob = new Blob(["\uFEFF" + csvString], { type: 'text/csv; charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `relatorio_faturamento_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
 
 // Start Runtime inicial da pagina
 checkAuth();
