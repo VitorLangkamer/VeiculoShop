@@ -518,7 +518,7 @@ a {
 
 .btn-text {
     font-family: var(--font-heading);
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -545,6 +545,7 @@ a {
 
 .about-img-col {
     position: relative;
+    margin: 20px; /* Reduz margens negativas e cria respiro nas laterais em telas menores */
 }
 
 .img-wrapper {
@@ -600,11 +601,13 @@ a {
 }
 
 .about-title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 8vw, 3rem); /* Responsive typography para não estourar lateral de telas 320px */
     line-height: 1.05;
     margin-bottom: 30px;
     letter-spacing: -1.5px;
     text-transform: uppercase;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .about-paragraphs {
@@ -1173,6 +1176,12 @@ a {
 
 @media (max-width: 990px) {
 
+    html, body {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
     /* Header & Nav */
     .header-container {
         display: flex;
@@ -1316,6 +1325,7 @@ a {
 
     .section-title {
         font-size: 2rem;
+        word-wrap: break-word;
     }
 
     /* Footer Configs */
