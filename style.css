@@ -28,7 +28,12 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-heading);
     font-weight: 800;
     margin: 0;
@@ -75,12 +80,14 @@ a {
 
 .header .container {
     max-width: 100%;
-    padding: 0 5%; /* Expande o header nas laterais */
+    padding: 0 5%;
+    /* Expande o header nas laterais */
 }
 
 .header-container {
     display: grid;
-    grid-template-columns: 1fr auto 1fr; /* Colunas para Logo (esquerda), Nav (centro) e Actions (direita) */
+    grid-template-columns: 1fr auto 1fr;
+    /* Colunas para Logo (esquerda), Nav (centro) e Actions (direita) */
     align-items: center;
 }
 
@@ -111,7 +118,8 @@ a {
     text-transform: uppercase;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
     color: var(--color-red);
 }
 
@@ -119,7 +127,8 @@ a {
     display: flex;
     align-items: center;
     gap: 24px;
-    justify-self: end; /* Fixa as ações na extremidade direita do grid */
+    justify-self: end;
+    /* Fixa as ações na extremidade direita do grid */
 }
 
 .icon-btn {
@@ -127,7 +136,8 @@ a {
     border: none;
     color: white;
     cursor: pointer;
-    display: flex;
+    display: none;
+    /* Changed from flex to prevent flex breaking media queries if forced */
     align-items: center;
     justify-content: center;
 }
@@ -150,7 +160,7 @@ a {
 
 /* Hero Section Track */
 .hero-track {
-    height: 400vh; /* Permite rolar para rodar 3 telas inteiras de animação */
+    height: 400vh;
     background-color: var(--bg-main);
 }
 
@@ -218,7 +228,7 @@ a {
 .btn-outline {
     background: transparent;
     color: white;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     font-family: var(--font-heading);
     font-size: 0.85rem;
     font-weight: 700;
@@ -232,12 +242,16 @@ a {
     color: black;
 }
 
-/* Filters Section */
+/* Filters Section (agora dentro do catálogo) */
 .filters-section {
     position: relative;
-    margin-top: -50px;
+    margin-top: 20px;
+    margin-bottom: 40px;
     z-index: 10;
-    margin-bottom: 100px;
+}
+
+.filters-section .container {
+    padding: 0; /* Remove padding duplo porque já está dentro do .container do estoque */
 }
 
 .filters-container {
@@ -303,8 +317,8 @@ a {
     right: 14px;
     top: 50%;
     transform: translateY(-50%);
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 5px solid #666;
@@ -337,6 +351,7 @@ a {
 /* Catalog Section */
 .catalog-section {
     padding-bottom: 100px;
+    padding-top: 100px;
 }
 
 .catalog-header {
@@ -368,6 +383,7 @@ a {
     width: 40px;
     background-color: var(--color-red);
 }
+
 .header-line .line-grey {
     flex: 1;
     background-color: #333;
@@ -634,7 +650,7 @@ a {
 
 /* Company Banner */
 .company-banner {
-    display: flex;  
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -774,7 +790,7 @@ a {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     border: none;
     color: white;
     width: 44px;
@@ -818,7 +834,8 @@ a {
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.5s ease, transform 1s ease;
-    cursor: pointer; /* Indica que é clicável */
+    cursor: pointer;
+    /* Indica que é clicável */
 }
 
 .carousel-img.active {
@@ -878,7 +895,8 @@ a {
     transition: background-color 0.2s;
 }
 
-.carousel-dots .dot.active, .carousel-dots .dot:hover {
+.carousel-dots .dot.active,
+.carousel-dots .dot:hover {
     background: var(--color-red);
 }
 
@@ -906,7 +924,7 @@ a {
     max-height: 90vh;
     object-fit: contain;
     user-select: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .lightbox-close {
@@ -1031,22 +1049,48 @@ a {
     opacity: 0;
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
 
 @keyframes fadeInLeft {
-    from { opacity: 0; transform: translateX(-40px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes fadeInRight {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Footer */
@@ -1128,6 +1172,7 @@ a {
 }
 
 @media (max-width: 990px) {
+
     /* Header & Nav */
     .header-container {
         display: flex;
@@ -1156,7 +1201,7 @@ a {
         align-items: center;
         transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         z-index: 1000;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
     }
 
     .nav.active {
@@ -1170,26 +1215,38 @@ a {
 
     /* Hero Section */
     .hero-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
         margin-top: 50px;
+        word-wrap: break-word;
     }
 
     .hero-subtitle {
         font-size: 1rem;
     }
-    
+
     /* Filters Grid */
+    .filters-section {
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    
     .filters-container {
         flex-direction: column;
+        align-items: stretch;
         padding: 20px;
-        margin-top: -30px;
     }
 
     .filters-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
         gap: 15px;
     }
-    
+
+    .filter-col {
+        width: 100%;
+    }
+
     .filter-action {
         width: 100%;
         margin-top: 15px;
@@ -1216,12 +1273,12 @@ a {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-    
+
     .modal-grid {
         grid-template-columns: 1fr;
         height: auto;
     }
-    
+
     /* Modal Tweaks */
     .modal-content {
         width: 95%;
@@ -1229,34 +1286,34 @@ a {
         max-height: 90vh;
         overflow-y: auto;
     }
-    
+
     .modal-img-col {
         height: 350px;
     }
-    
+
     .modal-info-col {
         padding: 30px 20px;
         height: auto;
     }
-    
+
     .modal-car-title {
         font-size: 1.8rem;
     }
-    
+
     .car-info {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
-    
+
     .company-banner {
         padding: 80px 20px;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     /* Footer Configs */
     .footer-nav {
         flex-direction: column;
@@ -1264,7 +1321,7 @@ a {
         text-align: center;
         margin-bottom: 25px;
     }
-    
+
     .footer-socials {
         margin-top: 20px;
         margin-bottom: 30px;
