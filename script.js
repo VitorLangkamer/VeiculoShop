@@ -197,8 +197,6 @@ if (canvas) {
         if (scrollProgress < 0) scrollProgress = 0;
         if (scrollProgress > 1) scrollProgress = 1;
         
-        // Transforma o progresso (0.0 até 1.0) num índíce de array
-        // Math.floor para não estourar. Index máximo é frameCount - 1
         const frameIndex = Math.min(
             frameCount - 1,
             Math.floor(scrollProgress * frameCount)
@@ -216,7 +214,7 @@ if (canvas) {
         const header = document.querySelector('.header');
         if (header) {
             // Hero passa da tela quando scroll é maior que a diferença
-            if (window.scrollY > maxScroll - 50) { 
+            if (window.scrollY > maxScroll - 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
